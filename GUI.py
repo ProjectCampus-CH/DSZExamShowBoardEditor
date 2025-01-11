@@ -104,10 +104,12 @@ def move_down():
 def save_to_json():
     exam_name = simpledialog.askstring("输入", "请输入考试标题：")
     message = simpledialog.askstring("输入", "请输入考试副标题：")
+    room = simpledialog.askstring("输入", "请输入考试教室：")
     
     exam_data = {
         "examName": exam_name,
         "message": message,
+        "room": room,
         "examInfos": exam_infos
     }
     
