@@ -2,6 +2,9 @@
 
 [![QQ群](https://img.shields.io/badge/-QQ%E7%BE%A4%EF%BD%9C901670561-blue?style=flat&logo=TencentQQ&logoColor=white)](https://qm.qq.com/q/zDiEipHsaI)
 
+![MainPage](/.Screenshots/main.png)
+![AddInfoPage](/.Screenshots/addinfo.png)
+![SavePage](/.Screenshots/save.png)
 
 一款为[考试看板](https://github.com/ProjectCampus-CH/exam-showboard-next)软件配套的配置文件生成软件
 
