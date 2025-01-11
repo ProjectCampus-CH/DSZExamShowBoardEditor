@@ -118,8 +118,8 @@ def save_to_json():
     message_entry = tk.Entry(dialog)
     message_entry.pack(pady=5)
     
-    # 考试教室输入框
-    room_label = tk.Label(dialog, text="考试教室：")
+    # 考场输入框
+    room_label = tk.Label(dialog, text="考场号：")
     room_label.pack(pady=5)
     room_entry = tk.Entry(dialog)
     room_entry.pack(pady=5)
