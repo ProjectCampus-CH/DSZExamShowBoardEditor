@@ -22,45 +22,135 @@ def format_date(date_text):
     else:
         raise ValueError("日期格式错误")
 
+def center_window(window):
+    window.update_idletasks()
+    width = window.winfo_width()
+    height = window.winfo_height()
+    x = (window.winfo_screenwidth() // 2) - (width // 2)
+    y = (window.winfo_screenheight() // 2) - (height // 2)
+    window.geometry('{}x{}+{}+{}'.format(width, height, x, y))
+
 def add_exam_info():
-    name = simpledialog.askstring("输入", "请输入考试科目名称：")
-    if not name:
-        return
+    # 创建一个新的对话框窗口
+    dialog = tk.Toplevel(app)
+    dialog.title("添加考试信息")
+    dialog.geometry("300x320")
+    center_window(dialog)  # 居中显示窗口
     
-    date = simpledialog.askstring("输入", "请输入考试日期（格式：YYYY-MM-DD 或 YYYY/MM/DD）：")
-    if not date:
-        messagebox.showerror("错误", "日期不能为空，请重新输入。")
-        return
-    try:
-        date = format_date(date)
-    except ValueError:
-        messagebox.showerror("错误", "日期格式错误，请重新输入。")
-        return
+    # 考试科目名称输入框
+    name_label = tk.Label(dialog, text="考试科目名称：")
+    name_label.pack(pady=5)
+    name_entry = tk.Entry(dialog)
+    name_entry.pack(pady=5)
     
-    start_time = simpledialog.askstring("输入", "请输入考试开始时间（格式：HH:MM:SS）：")
-    if not start_time:
-        messagebox.showerror("错误", "开始时间不能为空，请重新输入。")
-        return
+    # 考试日期输入框
+    date_label = tk.Label(dialog, text="考试日期（格式：YYYY-MM-DD 或 YYYY/MM/DD）：")
+    date_label.pack(pady=5)
+    date_entry = tk.Entry(dialog)
+    date_entry.pack(pady=5)
     
-    end_time = simpledialog.askstring("输入", "请输入考试结束时间（格式：HH:MM:SS）：")
-    if not end_time:
-        messagebox.showerror("错误", "结束时间不能为空，请重新输入。")
-        return
+    # 考试开始时间输入框
+    start_time_label = tk.Label(dialog, text="考试开始时间（格式：HH:MM:SS）：")
+    start_time_label.pack(pady=5)
+    start_time_entry = tk.Entry(dialog)
+    start_time_entry.pack(pady=5)
     
-    start = f"{date}T{convert_colon(start_time)}"
-    end = f"{date}T{convert_colon(end_time)}"
+    # 考试结束时间输入框
+    end_time_label = tk.Label(dialog, text="考试结束时间（格式：HH:MM:SS）：")
+    end_time_label.pack(pady=5)
+    end_time_entry = tk.Entry(dialog)
+    end_time_entry.pack(pady=5)
     
-    if not validate_datetime(start) or not validate_datetime(end):
-        messagebox.showerror("错误", "时间格式错误，请重新输入。")
-        return
+    # 确认按钮
+    def confirm():
+        name = name_entry.get()
+        date = date_entry.get()
+        start_time = start_time_entry.get()
+        end_time = end_time_entry.get()
+        
+        if not name or not date or not start_time or not end_time:
+            messagebox.showerror("错误", "所有字段都不能为空，请重新输入。")
+            return
+        
+        try:
+            date = format_date(date)
+        except ValueError:
+            messagebox.showerror("错误", "日期格式错误，请重新输入。")
+            return
+        
+        start = f"{date}T{convert_colon(start_time)}"
+        end = f"{date}T{convert_colon(end_time)}"
+        
+        if not validate_datetime(start) or not validate_datetime(end):
+            messagebox.showerror("错误", "时间格式错误，请重新输入。")
+            return
+        
+        exam_infos.append({
+            "name": name,
+            "start": start,
+            "end": end
+        })
+        update_exam_list()
+        messagebox.showinfo("成功", "考试信息已添加。")
+        dialog.destroy()
     
-    exam_infos.append({
-        "name": name,
-        "start": start,
-        "end": end
-    })
-    update_exam_list()
-    messagebox.showinfo("成功", "考试信息已添加。")
+    confirm_button = tk.Button(dialog, text="确认", command=confirm)
+    confirm_button.pack(pady=10)
+    
+    dialog.grab_set()  # 阻止用户与主窗口交互
+
+def save_to_json():
+    # 创建一个新的对话框窗口
+    dialog = tk.Toplevel(app)
+    dialog.title("保存到JSON")
+    dialog.geometry("300x250")
+    center_window(dialog)  # 居中显示窗口
+    
+    # 考试标题输入框
+    exam_name_label = tk.Label(dialog, text="考试标题：")
+    exam_name_label.pack(pady=5)
+    exam_name_entry = tk.Entry(dialog)
+    exam_name_entry.pack(pady=5)
+    
+    # 考试副标题输入框
+    message_label = tk.Label(dialog, text="考试副标题：")
+    message_label.pack(pady=5)
+    message_entry = tk.Entry(dialog)
+    message_entry.pack(pady=5)
+    
+    # 考场输入框
+    room_label = tk.Label(dialog, text="考场号：")
+    room_label.pack(pady=5)
+    room_entry = tk.Entry(dialog)
+    room_entry.pack(pady=5)
+    
+    # 确认按钮
+    def confirm():
+        exam_name = exam_name_entry.get()
+        message = message_entry.get()
+        room = room_entry.get()
+        
+        if not exam_name or not message or not room:
+            messagebox.showerror("错误", "所有字段都不能为空，请重新输入。")
+            return
+        
+        exam_data = {
+            "examName": exam_name,
+            "message": message,
+            "room": room,
+            "examInfos": exam_infos
+        }
+        
+        with open('exam_config.json', 'w', encoding='utf-8') as f:
+            json.dump(exam_data, f, ensure_ascii=False, indent=4)
+        
+        messagebox.showinfo("成功", "JSON文件已生成：exam_config.json")
+        dialog.destroy()
+    
+    confirm_button = tk.Button(dialog, text="确认", command=confirm)
+    confirm_button.pack(pady=10)
+    
+    dialog.grab_set()  # 阻止用户与主窗口交互
 
 def update_exam_list():
     listbox.delete(0, tk.END)
@@ -100,25 +190,17 @@ def move_down():
     exam_infos[index], exam_infos[index + 1] = exam_infos[index + 1], exam_infos[index]
     update_exam_list()
     listbox.select_set(index + 1)
-
-def save_to_json():
-    exam_name = simpledialog.askstring("输入", "请输入考试标题：")
-    message = simpledialog.askstring("输入", "请输入考试副标题：")
-    
-    exam_data = {
-        "examName": exam_name,
-        "message": message,
-        "examInfos": exam_infos
-    }
-    
-    with open('exam_config.json', 'w', encoding='utf-8') as f:
-        json.dump(exam_data, f, ensure_ascii=False, indent=4)
-    
-    messagebox.showinfo("成功", "JSON文件已生成：exam_config.json")
-
 app = tk.Tk()
-app.title("考试信息输入")
-app.geometry("400x300")
+app.title("考试看板配置生成")
+app.geometry("400x350")
+
+# 计算并设置主窗口的位置使其居中显示
+app.update_idletasks()
+width = app.winfo_width()
+height = app.winfo_height()
+x = (app.winfo_screenwidth() // 2) - (width // 2)
+y = (app.winfo_screenheight() // 2) - (height // 2)
+app.geometry('{}x{}+{}+{}'.format(width, height, x, y))
 
 exam_infos = []
 
