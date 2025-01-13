@@ -3,6 +3,8 @@ name: 构建
 on:
   push:
   pull_request:
+  release:
+    types: [published]
   workflow_dispatch:
 
 concurrency:
