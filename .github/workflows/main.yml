@@ -5,7 +5,6 @@ on:
     types: [published]
   pull_request:
   workflow_dispatch:
-  push:
 
 concurrency:
   group: build-${{ github.ref }}
