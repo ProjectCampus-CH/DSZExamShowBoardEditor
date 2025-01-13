@@ -10,7 +10,7 @@ on:
 concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: true
- 
+
 jobs:
   builder_matrix:
     strategy:
@@ -46,13 +46,14 @@ jobs:
           name: ${{ matrix.os }}-${{ matrix.arch }}
           path: ./build/GUI
 
+      - name: Compress GUI contents
+        run: |
+          Compress-Archive -Path ./Build/GUI/* -DestinationPath gui_contents.zip
+
       - name: Upload assets to GitHub Release
         if: github.event_name == 'release' && github.event.action == 'published'
         uses: softprops/action-gh-release@v1
         with:
-          files: |
-            dist/*.exe
-            dist/*.dmg
-            dist/*.AppImage
+          files: gui_contents.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
