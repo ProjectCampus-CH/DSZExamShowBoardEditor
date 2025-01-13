@@ -1,11 +1,11 @@
 name: 构建
 
 on:
-  push:
-  pull_request:
   release:
     types: [published]
+  pull_request:
   workflow_dispatch:
+  push:
 
 concurrency:
   group: build-${{ github.ref }}
@@ -41,12 +41,12 @@ jobs:
 
       - name: Compress GUI contents
         run: |
-          Compress-Archive -Path ./dist/* -DestinationPath gui_contents.zip
+          Compress-Archive -Path ./dist/* -DestinationPath gui_contents-${{ matrix.os }}-${{ matrix.arch }}.zip
 
       - name: Upload assets to GitHub Release
         if: github.event_name == 'release' && github.event.action == 'published'
         uses: softprops/action-gh-release@v1
         with:
-          files: gui_contents.zip
+          files: gui_contents-${{ matrix.os }}-${{ matrix.arch }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
