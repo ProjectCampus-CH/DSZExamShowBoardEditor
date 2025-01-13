@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 import tkinter as tk
 from tkinter import messagebox
-from tkinter import simpledialog
+from tkinter import simpledialog, filedialog
 
 def open_config_file():
     file_path = tk.filedialog.askopenfilename(filetypes=[("JSON files", "*.json")])
