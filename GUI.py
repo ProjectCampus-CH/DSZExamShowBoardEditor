@@ -148,7 +148,6 @@ def add_exam_info():
     end_time_label.pack(pady=5)
     end_time_entry = tk.Entry(dialog)
     end_time_entry.pack(pady=5)
-
     
     # 确认按钮
     def confirm():
@@ -281,7 +280,7 @@ def move_down():
     listbox.select_set(index + 1)
 app = tk.Tk()
 app.title("考试看板配置生成")
-app.geometry("400x350")
+app.geometry("400x380")
 
 # 计算并设置主窗口的位置使其居中显示
 app.update_idletasks()

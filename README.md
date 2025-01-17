@@ -6,10 +6,10 @@
 ![AddInfoPage](/.Screenshots/addinfo.png) <br>
 ![SavePage](/.Screenshots/save.png)
 
-一款为[考试看板](https://github.com/ProjectCampus-CH/exam-showboard-next)软件配套的配置文件编写生成软件
+一款为[考试看板](https://github.com/ExamAware/dsz-exam-showboard)软件配套的配置文件编写生成软件
 
 
-| 下载 | [Releases](https://github.com/ProjectCampus-CH/DSZExamShowBoardEditor/releases) |
+| 下载 | [Releases](https://github.com/ExamAware/DSZExamShowBoardEditor/releases/latest) |
 | ---- | -------------------------------------------------------------------------------- | 
 
 ## 功能
@@ -36,8 +36,8 @@
 
 ## 遇到问题
 
-💡 如果您遇到 `Bug` ，或需要提出`优化`建议或新的`功能`，请提交 [`Issues`](https://github.com/ProjectCampus-CH/DSZExamShowBoardEditor/issues) 或在 [`Discussions`](https://github.com/ProjectCampus-CH/DSZExamShowBoardEditor/discussions) 中讨论。
+💡 如果您遇到 `Bug` ，或需要提出`优化`建议或新的`功能`，请提交 [`Issues`](https://github.com/ExamAware/DSZExamShowBoardEditor/issues) 或在 [`Discussions`](https://github.com/ExamAware/DSZExamShowBoardEditor/discussions) 中讨论。
 
 👥 您也可以加入 [`QQ群｜901670561`](https://qm.qq.com/q/zDiEipHsaI)获取帮助或交流讨论。
 
-🛠️ 欢迎为本软件进行改进或编写新功能提交 [`Pull Request`](https://github.com/ProjectCampus-CH/DSZExamShowBoardEditor/pulls)
+🛠️ 欢迎为本软件进行改进或编写新功能提交 [`Pull Request`](https://github.com/ExamAware/DSZExamShowBoardEditor/pulls)
