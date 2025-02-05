@@ -1,4 +1,6 @@
-# ExamShowBoard编辑器
+# ExamShowBoard编辑器(legacy)    
+> [!warning]
+> [**配置文件编辑器(legacy)不再维护** 如果您汇报使用此编辑器遇到的相关问题， **开发者可能不会受理。**](https://docs.examaware.us.kg/app/profile/faq.html#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91%E5%99%A8-legacy)
 
 [![QQ群](https://img.shields.io/badge/-QQ%E7%BE%A4%EF%BD%9C901670561-blue?style=flat&logo=TencentQQ&logoColor=white)](https://qm.qq.com/q/zDiEipHsaI)
 
